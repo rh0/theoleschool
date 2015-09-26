@@ -60,7 +60,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
       <div class="created">1:25pm</div>
     </div>
   
-    <h2 class="node-title">Templating the Commerce Order Completion Pane</h2>    <div class="tags clearfix"><div class="field field-name-field-blog-tags field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="../../tags/commerce/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">commerce</a></div><div class="field-item odd"><a href="../../tags/7x/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">7.x</a></div><div class="field-item even"><a href="../../tags/drupal/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">drupal</a></div></div></div></div>
+    <h2 class="node-title">Templating the Commerce Order Completion Pane</h2>    <div class="tags clearfix"><div class="field field-name-field-blog-tags field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="../../tags/commerce/" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">commerce</a></div><div class="field-item odd"><a href="../../tags/7x/" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">7.x</a></div><div class="field-item even"><a href="../../tags/drupal/" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">drupal</a></div></div></div></div>
 
         <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>I recently found myself working on a fairly simple Drupal Commerce site.  There weren't a lot of tricks to it, just a few items and an "express" checkout.  So I fired up the <a href="http://drupal.org/project/commerce_kickstart">Commerce Kickstart</a> profile and after a few small tweaks, had it just about right.  As we approached the theme, it became obvious that the commerce completion pane was going to take a lot of love.  The designers had given us a unique layout for how this page should appear, complete with order specific information displayed in a kaleidoscope of containers.  This was going to take some markup, and my first thought was, "it sure would be nice to template this."</p><!--break-->
 <p>Turns out that's a fairly simple task thanks to <a href="http://api.drupalcommerce.org/api/Drupal Commerce/sites!all!modules!commerce!modules!checkout!commerce_checkout.api.php/function/hook_commerce_checkout_pane_info_alter/DC">hook_commerce_checkout_pane_info_alter</a>.  The function passes the variable <span class="geshifilter"><code class="php geshifilter-php"><span style="color: #000088;">$checkout_panes</span></code></span> by reference which contains an array of checkout pane arrays.  This function is going to allow us to redefine the function that the checkout completion pane is looking to for output.  This will look something like:</p>
@@ -105,14 +105,14 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <!-- Header -->
 <div id="meta-header" class="clearfix">
   <div class="header-content">
-    <h1 class="logo"><a href="../../index/index.html">
+    <h1 class="logo"><a href="../../index/">
       <span class="name">Ryan Oles</span>
       <span class="name site-name">the<span class="color-orng">oles</span>chool.com</span>
     </a></h1>
         <!-- Navigation -->
           <div id="main-menu" class="top-nav clearfix">
-        <h2 class="element-invisible">Main menu</h2><ul id="main-menu-nav" class="links clearfix"><li class="menu-345 first"><a href="../../about/index.html">About</a></li>
-<li class="menu-275 last"><a href="../../index/index.html" title="go back to front page">Home</a></li>
+        <h2 class="element-invisible">Main menu</h2><ul id="main-menu-nav" class="links clearfix"><li class="menu-345 first"><a href="../../about/">About</a></li>
+<li class="menu-275 last"><a href="../../index/" title="go back to front page">Home</a></li>
 </ul>      </div>
       </div>
 </div>  </body>

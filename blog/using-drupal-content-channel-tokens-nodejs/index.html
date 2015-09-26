@@ -61,9 +61,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
       <div class="created">12:29pm</div>
     </div>
   
-    <h2 class="node-title">Using Drupal Content Channel Tokens with Nodejs</h2>    <div class="tags clearfix"><div class="field field-name-field-blog-tags field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="../../tags/nodejs/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">nodejs</a></div><div class="field-item odd"><a href="../../tags/7x/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">7.x</a></div><div class="field-item even"><a href="../../tags/drupal/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">drupal</a></div></div></div></div>
+    <h2 class="node-title">Using Drupal Content Channel Tokens with Nodejs</h2>    <div class="tags clearfix"><div class="field field-name-field-blog-tags field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="../../tags/nodejs/" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">nodejs</a></div><div class="field-item odd"><a href="../../tags/7x/" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">7.x</a></div><div class="field-item even"><a href="../../tags/drupal/" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">drupal</a></div></div></div></div>
 
-        <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>You've decided to add a bit of Node.js functionality to your Drupal site using the <a href="https://drupal.org/project/nodejs">Drupal Nodejs Module</a>.  After <a href="../module-development-nodejs-integration/index.html">some reading</a> you realize you need to be setting up user message channels using <span class="geshifilter"><code class="php geshifilter-php">hook_nodejs_user_channels</code></span> or possibly <span class="geshifilter"><code class="php geshifilter-php">nodejs_add_user_to_channel</code></span>. This allows your application to send socket messages to groups of users.  Great!  But you're writing no simple application. You want to go one step further and manage these channels based not only on some property of the user object, but all users who may be currently viewing a particular Drupal served page.  Suddenly the typical user channels no longer cut it. Try as you might, you'll find yourself quickly descending into channel management hell. There has got to be a better way. Thankfully content token channels are here to help.</p>
+        <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>You've decided to add a bit of Node.js functionality to your Drupal site using the <a href="https://drupal.org/project/nodejs">Drupal Nodejs Module</a>.  After <a href="../module-development-nodejs-integration/">some reading</a> you realize you need to be setting up user message channels using <span class="geshifilter"><code class="php geshifilter-php">hook_nodejs_user_channels</code></span> or possibly <span class="geshifilter"><code class="php geshifilter-php">nodejs_add_user_to_channel</code></span>. This allows your application to send socket messages to groups of users.  Great!  But you're writing no simple application. You want to go one step further and manage these channels based not only on some property of the user object, but all users who may be currently viewing a particular Drupal served page.  Suddenly the typical user channels no longer cut it. Try as you might, you'll find yourself quickly descending into channel management hell. There has got to be a better way. Thankfully content token channels are here to help.</p>
 
 <h3>Send a Message Based on the Content Being Viewed</h3>
 
@@ -91,7 +91,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <span style="color: #666666; font-style: italic;">// Send the message to the channel we created</span><br />
 nodejs_send_content_channel_message<span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></div>
 
-<p>And that's about it!  When <span class="geshifilter"><code class="php geshifilter-php">nodejs_send_content_channel_message</code></span> fires our message will be broadcast to all users subscribed to the page_node_channel.  In this case all users who are currently viewing a node of type <em>page</em>.  This message behaves like any other on the Node.js side, so you could send it to a custom callback handler, as mentioned <a href="../module-development-nodejs-integration/index.html">in an earlier post</a>.</p>
+<p>And that's about it!  When <span class="geshifilter"><code class="php geshifilter-php">nodejs_send_content_channel_message</code></span> fires our message will be broadcast to all users subscribed to the page_node_channel.  In this case all users who are currently viewing a node of type <em>page</em>.  This message behaves like any other on the Node.js side, so you could send it to a custom callback handler, as mentioned <a href="../module-development-nodejs-integration/">in an earlier post</a>.</p>
 
 <h3>Token Messages From an Node.js Extension</h3>
 
@@ -129,14 +129,14 @@ nodejs_send_content_channel_message<span style="color: #009900;">&#40;</span><sp
 <!-- Header -->
 <div id="meta-header" class="clearfix">
   <div class="header-content">
-    <h1 class="logo"><a href="../../index/index.html">
+    <h1 class="logo"><a href="../../index/">
       <span class="name">Ryan Oles</span>
       <span class="name site-name">the<span class="color-orng">oles</span>chool.com</span>
     </a></h1>
         <!-- Navigation -->
           <div id="main-menu" class="top-nav clearfix">
-        <h2 class="element-invisible">Main menu</h2><ul id="main-menu-nav" class="links clearfix"><li class="menu-345 first"><a href="../../about/index.html">About</a></li>
-<li class="menu-275 last"><a href="../../index/index.html" title="go back to front page">Home</a></li>
+        <h2 class="element-invisible">Main menu</h2><ul id="main-menu-nav" class="links clearfix"><li class="menu-345 first"><a href="../../about/">About</a></li>
+<li class="menu-275 last"><a href="../../index/" title="go back to front page">Home</a></li>
 </ul>      </div>
       </div>
 </div>  </body>
