@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+  "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+
+
+<!-- Mirrored from theoleschool.com/blog/talking-drupal-nodejs by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Sep 2015 17:07:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="As I&#039;ve mentioned in a previous post sending messages from Drupal to Node is fairly easy to accomplish.  However, that is only part of the equation. If we&#039;re really wanting to build a larger, more complex Node application, it won&#039;t be long before we need the client to talk to the Node server and possibly the Node server to talk to Drupal.  At a glance it isn&#039;t terribly obvious how to do this with the nodejs integration module, but it turns  out there are a few tools tucked in the module code that come to the rescue." />
+<link rel="shortcut icon" href="../../misc/favicon/index.ico" type="image/vnd.microsoft.icon" />
+<meta content="Talking to Drupal with Node.js" about="/blog/talking-drupal-nodejs" property="dc:title" />
+<meta name="keywords" content="drupal, web development, nodejs" />
+<link rel="canonical" href="index.html" />
+<link rel="shortlink" href="index.html" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+  <title>Talking to Drupal with Node.js | theoleschool</title>
+  <link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_pbm0lsQQJ7A7WCCIMgxLho6mI_kBNgznNUWmTWcnfoE/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_botNHIYRQPys-RH2iA3U4LbV9bPNRS64tLAs8ec1ch8/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_ggwmJjnSHIyQGr6BcS46i7z-SeJR7vFJ2H8b7fsUJ1o/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_wTnXwKLp1ec_eSA6aRSbc1Cr7mXlDTPbLelDm9ZTjQg/index.css" media="screen" />
+  <script type="text/javascript" src="../../sites/default/files/js/js_xAPl0qIk9eowy_iS9tNkCWXLUVoat94SQT48UBCFkyQ/index.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_mEEqrZApHAidJyywsmZR_Ac1d4B-4FLzvR9sbsjVDyg/index.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_IDBX5SzkJ9gGNq7x-qOE_2DZsexqguTJQGMKvi4w-Uw/index.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var _gaq = _gaq || [];_gaq.push(["_setAccount", "UA-25692833-1"]);_gaq.push(["_trackPageview"]);(function() {var ga = document.createElement("script");ga.type = "text/javascript";ga.async = true;ga.src = "../../sites/default/files/googleanalytics/ga/index.js?nvammp";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ga, s);})();
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"olesain","theme_token":"B39IiEhLVH4bHXxSGOhk9worZOLwXUsDo31rUhZzHGs","js":{"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/admin_menu\/admin_devel\/admin_devel.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/geshifilter\/geshifilter.css":1,"sites\/default\/themes\/olesain\/css\/reset.css":1,"sites\/default\/themes\/olesain\/css\/style.css":1}},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls|xml|z|zip"}});
+//--><!]]>
+</script>
+</head>
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-162 node-type-article" >
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+  </div>
+    <div id="center-col">
+  <!--  Main Content Container -->
+  <div id="main-wrap">
+    <div class="content-wrap">
+              <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+
+    
+  <div class="content">
+    <div id="node-162" class="node node-article node-promoted clearfix">
+      <div class="meta clearfix">
+      <div class="auth">October 28, 2012</div>
+      <div class="created">8:36pm</div>
+    </div>
+  
+    <h2 class="node-title">Talking to Drupal with Node.js</h2>    <div class="tags clearfix"><div class="field field-name-field-blog-tags field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="../../tags/nodejs/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">nodejs</a></div><div class="field-item odd"><a href="../../tags/7x/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">7.x</a></div><div class="field-item even"><a href="../../tags/drupal/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">drupal</a></div></div></div></div>
+
+        <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>As I've mentioned in a <a href="../module-development-nodejs-integration/index.html">previous post</a> sending messages from Drupal to Node is fairly easy to accomplish.  However, that is only part of the equation. If we're really wanting to build a larger, more complex Node application, it won't be long before we need the client to talk to the Node server and possibly the Node server to talk to Drupal.  At a glance it isn't terribly obvious how to do this with the <a href="http://drupal.org/project/nodejs">nodejs integration module</a>, but it turns  out there are a few tools tucked in the module code that come to the rescue.</p>
+<p>This post will assume some familiarity with the use of the server extension functionality built into the nodejs module.  If you are unfamiliar with this, have a look at the <a href="http://drupalcode.org/project/nodejs.git/blob/4dd8f7808feb70d2f71c6978336ffeaed7eef65a:/nodejs.server.extension.js.example">example server extension</a> included with the module.  In short it does what you might think, allowing other modules to extend the nodejs server setup by the nodejs module.  For context I've posted a fully commented <a href="https://github.com/rh0/node_to_drupal">example module</a> to GitHub from which the code snippets of this post are taken.</p>
+<p>If you are familiar with writing node apps with <a href="http://socket.io/">Socket.io</a> then you are likely already familiar with client side communication back to the node server.  Typically you will have a <span class="geshifilter"><code class="php geshifilter-php">socket<span style="color: #339933;">.</span>emit</code></span> on the client side, and a listener to handle the message event on the server side.  The same is true when using the nodejs module.  In this example I'm building a very simple form with Drupal and displaying it on a page.  When the submit button is hit, a bit of client side javascript emits a message through socket.io which is in the <span class="geshifilter"><code class="php geshifilter-php">Drupal<span style="color: #339933;">.</span>Nodejs</code></span> object. </p>
+<div class="geshifilter"><div class="jquery geshifilter-jquery" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">// A simple message.  The listener on the server side does not like us to</span><br /><span style="color: #006600; font-style: italic;">// specify 'messageType' so we're calling it 'type' for now.</span><br /><span style="color: #003366; font-weight: bold;">var</span> message <span style="color: #339933;">=</span> <span style="color: #009900;">{</span><br />
+  type<span style="color: #339933;">:</span> <span style="color: #3366CC;">'nodeToDrupal'</span><span style="color: #339933;">,</span><br />
+  messageBody<span style="color: #339933;">:</span> <span style="color: #3366CC;">'Hello from the client side!'</span><br /><span style="color: #009900;">}</span><span style="color: #339933;">;</span><br /><br />
+Drupal.<span style="color: #660066;">behaviors</span>.<span style="color: #660066;">sendDrupalMessage</span> <span style="color: #339933;">=</span> <span style="color: #009900;">{</span><br />
+  attach<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">(</span><a href="http://docs.jquery.com/Core/context"><span style="color: #000066;">context</span></a><span style="color: #339933;">,</span> settings<span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br />
+    <span style="color: #006600; font-style: italic;">// Have our message emitter fire on form submission.</span><br />
+    <span style="color: #000066;">$</span><span style="color: #009900;">(</span><span style="color: #3366CC;">"#node-to-drupal-form"</span><span style="color: #009900;">)</span>.<a href="http://docs.jquery.com/Events/submit"><span style="color: #000066;">submit</span></a><span style="color: #009900;">(</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br />
+      Drupal.<span style="color: #660066;">Nodejs</span>.<span style="color: #660066;">socket</span>.<span style="color: #660066;">emit</span><span style="color: #009900;">(</span><span style="color: #3366CC;">'message'</span><span style="color: #339933;">,</span> message<span style="color: #009900;">)</span><span style="color: #339933;">;</span><br />
+      <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #003366; font-weight: bold;">false</span><span style="color: #339933;">;</span><br />
+    <span style="color: #009900;">}</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br />
+  <span style="color: #009900;">}</span><br /><span style="color: #009900;">}</span></div></div>
+<p>On the server side, in our server extension file, we need to catch our message.  This is done in a fairly standard way, the event we are listening for is <span class="geshifilter"><code class="php geshifilter-php">client<span style="color: #339933;">-</span>message</code></span>.</p>
+<div class="geshifilter"><div class="jquery geshifilter-jquery" style="font-family:monospace;"> <br />
+exports.<span style="color: #660066;">setup</span> <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">(</span>config<span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br />
+  process.<span style="color: #660066;">on</span><span style="color: #009900;">(</span><span style="color: #3366CC;">'client-message'</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">(</span>sessionId<span style="color: #339933;">,</span> message<span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br />
+    <span style="color: #006600; font-style: italic;">// Logging the message to the console.</span><br />
+    console.<span style="color: #660066;">log</span><span style="color: #009900;">(</span><span style="color: #3366CC;">'Got a message from the client.  Take a look: '</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br />
+    console.<span style="color: #660066;">log</span><span style="color: #009900;">(</span>message<span style="color: #009900;">)</span><span style="color: #339933;">;</span><br />
+  <span style="color: #009900;">}</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br /><span style="color: #009900;">}</span></div></div>
+<p>If a client message comes through, we log it to the console.  For a lot of node applications our worries are over.  We have a way for the client to send a message to the node server.  From there we can have the node server do whatever we would like with it.  Maybe spit a message back out to the client, to a different session, to a Redis store, or any number of other things.  Now the big question.  What if we want the node server to send a message to Drupal?  There are several reasons we may want to do this, but chief among them would be a database write.  The idea of having node write directly to the Drupal database, while possible, would surely harm large baskets full of kittens.  It's a bad idea.  So we need node to tell Drupal to do its bidding, and for that we need to look at a <span class="geshifilter"><code class="php geshifilter-php">hook_nodejs_message_callback</code></span>.  This hook allows us to assign handler functions to various message types that being emitted from the node server, and is wonderfully simple.</p>
+<div class="geshifilter"><div class="drupal6 geshifilter-drupal6" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">function</span> node_to_drupal_nodejs_message_callback<span style="color: #66cc66;">(</span><span style="color: #0000ff;">$type</span><span style="color: #66cc66;">)</span> <span style="color: #66cc66;">{</span><br />
+  <span style="color: #b1b100;">switch</span><span style="color: #66cc66;">(</span><span style="color: #0000ff;">$type</span><span style="color: #66cc66;">)</span> <span style="color: #66cc66;">{</span><br />
+    <span style="color: #b1b100;">case</span> <span style="color: #ff0000;">'nodeToDrupal'</span>:<br />
+      <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'node_to_drupal_handler'</span><span style="color: #66cc66;">)</span>;<br />
+  <span style="color: #66cc66;">}</span><br />
+  <span style="color: #b1b100;">return</span> <span style="color: #000000; font-weight: bold;">false</span>;<br /><span style="color: #66cc66;">}</span></div></div>
+<p>The hook is fired on an <span class="geshifilter"><code class="php geshifilter-php">sendMessageToBackend</code></span> call from the node server and passes in <span class="geshifilter"><code class="php geshifilter-php">messageType</code></span> from the message.  In our case the type is <span class="geshifilter"><code class="php geshifilter-php">nodeToDrupal</code></span> (more on this in a bit).  The hook is expected to return and array of function names, that will subsequently be called.   In this case <span class="geshifilter"><code class="php geshifilter-php">node_to_drupal_handler</code></span>.</p>
+<div class="geshifilter"><div class="drupal6 geshifilter-drupal6" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">function</span> node_to_drupal_handler<span style="color: #66cc66;">(</span><span style="color: #0000ff;">$message</span>, <span style="color: #66cc66;">&amp;</span><span style="color: #0000ff;">$responce</span><span style="color: #66cc66;">)</span> <span style="color: #66cc66;">{</span><br />
+  <span style="color: #808080; font-style: italic;">// Grab our messageBody from the client message and post it to the watchdog.</span><br />
+  <a href="http://api.drupal.org/api/function/watchdog/6"><span style="color: #000066;">watchdog</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'node_to_drupal'</span>, <span style="color: #0000ff;">$message</span><span style="color: #66cc66;">[</span><span style="color: #ff0000;">'messageBody'</span><span style="color: #66cc66;">]</span>, <a href="http://www.php.net/array"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">(</span><span style="color: #66cc66;">)</span>, <a href="http://api.drupal.org/api/constant/WATCHDOG_INFO/6"><span style="color: #000000; font-weight: bold;">WATCHDOG_INFO</span></a><span style="color: #66cc66;">)</span>;<br />
+  <span style="color: #808080; font-style: italic;">// Tell node we got the message.</span><br />
+  <span style="color: #0000ff;">$responce</span> = <span style="color: #ff0000;">'Message logged to Watchdog!'</span>;<br /><span style="color: #66cc66;">}</span></div></div>
+<p>The handler functions called from <span class="geshifilter"><code class="php geshifilter-php">hook_nodejs_message_callback</code></span> expect two parameters.  The message from node (as an array), and a response passed by reference.  In this example we're make a simple watchdog entry of the <span class="geshifilter"><code class="php geshifilter-php">messageBody</code></span>, and adding a string to the response stating that Drupal got the message.</p>
+<p>Going back to our node server extension, we're going to fire the message we got from the client over to Drupal.  To do this were going to use a handy function in our config variable called <span class="geshifilter"><code class="php geshifilter-php">sendMessageToBackend</code></span>.  Our server extension code is now looking like:
+</p><div class="geshifilter"><div class="jquery geshifilter-jquery" style="font-family:monospace;">exports.<span style="color: #660066;">setup</span> <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">(</span>config<span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br />
+  process.<span style="color: #660066;">on</span><span style="color: #009900;">(</span><span style="color: #3366CC;">'client-message'</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">(</span>sessionId<span style="color: #339933;">,</span> message<span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br />
+    <span style="color: #006600; font-style: italic;">// Logging the message to the console.</span><br />
+    console.<span style="color: #660066;">log</span><span style="color: #009900;">(</span><span style="color: #3366CC;">'Got a message from the client.  Take a look: '</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br />
+    console.<span style="color: #660066;">log</span><span style="color: #009900;">(</span>message<span style="color: #009900;">)</span><span style="color: #339933;">;</span><br /><br />
+    <span style="color: #006600; font-style: italic;">// Insuring that messageType is set before passing along.</span><br />
+    message.<span style="color: #660066;">messageType</span> <span style="color: #339933;">=</span> message.<span style="color: #660066;">type</span><span style="color: #339933;">;</span><br />
+    <span style="color: #006600; font-style: italic;">// Send the message to Drupal.</span><br />
+    config.<span style="color: #660066;">sendMessageToBackend</span><span style="color: #009900;">(</span>message<span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">(</span><a href="http://docs.jquery.com/Events/error"><span style="color: #000066;">error</span></a><span style="color: #339933;">,</span> responce<span style="color: #339933;">,</span> body<span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br />
+      <span style="color: #000066; font-weight: bold;">if</span><span style="color: #009900;">(</span><a href="http://docs.jquery.com/Events/error"><span style="color: #000066;">error</span></a><span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br />
+        console.<span style="color: #660066;">log</span><span style="color: #009900;">(</span><span style="color: #3366CC;">'Error sending message to backend.'</span><span style="color: #339933;">,</span> <a href="http://docs.jquery.com/Events/error"><span style="color: #000066;">error</span></a><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br />
+        <span style="color: #000066; font-weight: bold;">return</span><span style="color: #339933;">;</span><br />
+      <span style="color: #009900;">}</span><br />
+      <span style="color: #006600; font-style: italic;">// Drupal got it! Output the responce.</span><br />
+      console.<span style="color: #660066;">log</span><span style="color: #009900;">(</span><span style="color: #3366CC;">'Response from drupal: '</span><span style="color: #339933;">,</span> body<span style="color: #009900;">)</span><span style="color: #339933;">;</span><br />
+    <span style="color: #009900;">}</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br />
+  <span style="color: #009900;">}</span><span style="color: #009900;">)</span><br /><span style="color: #009900;">}</span><span style="color: #339933;">;</span></div></div>
+<p>We grab our message from the client and send it to the Drupal backend, then upon success log Drupal's response to the console. Now our little message chain is complete!  We have a message coming from the client side to the node server upon a user action. Then node passes that message along to Drupal which records it in the watchdog.  This means that not only can we have our node server interacting back and forth with the client, but also have tremendous flexibility over how the node server can interact with Drupal.</p></div></div></div>
+    <div class="meta clearfix">
+      </div>
+  <div class="olesain-comments clearfix">
+          </div>
+</div>  </div>
+</div>
+  </div>
+    </div>
+  </div>
+</div>
+<!-- Header -->
+<div id="meta-header" class="clearfix">
+  <div class="header-content">
+    <h1 class="logo"><a href="../../index/index.html">
+      <span class="name">Ryan Oles</span>
+      <span class="name site-name">the<span class="color-orng">oles</span>chool.com</span>
+    </a></h1>
+        <!-- Navigation -->
+          <div id="main-menu" class="top-nav clearfix">
+        <h2 class="element-invisible">Main menu</h2><ul id="main-menu-nav" class="links clearfix"><li class="menu-345 first"><a href="../../about/index.html">About</a></li>
+<li class="menu-275 last"><a href="../../index/index.html" title="go back to front page">Home</a></li>
+</ul>      </div>
+      </div>
+</div>  </body>
+
+<!-- Mirrored from theoleschool.com/blog/talking-drupal-nodejs by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Sep 2015 17:07:12 GMT -->
+</html>

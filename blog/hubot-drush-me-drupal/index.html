@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+  "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+
+
+<!-- Mirrored from theoleschool.com/blog/hubot-drush-me-drupal by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Sep 2015 17:07:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Recently the company I work for shifted the bulk of our instant message communications over to [Campfire](http://campfirenow.com/), and established a series of rooms to discuss our various projects.  This transition seemed to go fairly well, once everyone settled on their preferred client interface.  I was used to using IRC and found a [nice little Ruby gem](https://github.com/zerowidth/camper_van) that piped Campfire through my IRC client.  Chatting in this environment quickly had me missing Druplicon, the friendly Drupal fueled chat bot that tirelessly serves the Drupal IRC community.  I decided to look for a replacement, and after some searching I stumbled upon [Hubot](http://hubot.github.com/), a Node.js powered chat bot. It was initially built by the folks at GitHub and includes a long list of [plugin scripts](http://hubot-script-catalog.herokuapp.com/) added by community developers.  This was immediately appealing for several reasons:" />
+<link rel="shortcut icon" href="../../misc/favicon/index.ico" type="image/vnd.microsoft.icon" />
+<meta content="Hubot Drush me Drupal" about="/blog/hubot-drush-me-drupal" property="dc:title" />
+<meta name="keywords" content="drupal, web development" />
+<link rel="canonical" href="index.html" />
+<link rel="shortlink" href="index.html" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+  <title>Hubot Drush me Drupal | theoleschool</title>
+  <link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_pbm0lsQQJ7A7WCCIMgxLho6mI_kBNgznNUWmTWcnfoE/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_botNHIYRQPys-RH2iA3U4LbV9bPNRS64tLAs8ec1ch8/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_ggwmJjnSHIyQGr6BcS46i7z-SeJR7vFJ2H8b7fsUJ1o/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_wTnXwKLp1ec_eSA6aRSbc1Cr7mXlDTPbLelDm9ZTjQg/index.css" media="screen" />
+  <script type="text/javascript" src="../../sites/default/files/js/js_xAPl0qIk9eowy_iS9tNkCWXLUVoat94SQT48UBCFkyQ/index.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_mEEqrZApHAidJyywsmZR_Ac1d4B-4FLzvR9sbsjVDyg/index.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_IDBX5SzkJ9gGNq7x-qOE_2DZsexqguTJQGMKvi4w-Uw/index.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var _gaq = _gaq || [];_gaq.push(["_setAccount", "UA-25692833-1"]);_gaq.push(["_trackPageview"]);(function() {var ga = document.createElement("script");ga.type = "text/javascript";ga.async = true;ga.src = "../../sites/default/files/googleanalytics/ga/index.js?nvammp";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ga, s);})();
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"olesain","theme_token":"b9kQbDIrFbq5YB0cPWpF3mwgxNFanWht5wUDpN2My0c","js":{"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/admin_menu\/admin_devel\/admin_devel.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/geshifilter\/geshifilter.css":1,"sites\/default\/themes\/olesain\/css\/reset.css":1,"sites\/default\/themes\/olesain\/css\/style.css":1}},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls|xml|z|zip"}});
+//--><!]]>
+</script>
+</head>
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-163 node-type-article" >
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+  </div>
+    <div id="center-col">
+  <!--  Main Content Container -->
+  <div id="main-wrap">
+    <div class="content-wrap">
+              <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+
+    
+  <div class="content">
+    <div id="node-163" class="node node-article node-promoted clearfix">
+      <div class="meta clearfix">
+      <div class="auth">May 7, 2013</div>
+      <div class="created">11:15pm</div>
+    </div>
+  
+    <h2 class="node-title">Hubot Drush me Drupal</h2>    <div class="tags clearfix"><div class="field field-name-field-blog-tags field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="../../tags/nodejs/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">nodejs</a></div><div class="field-item odd"><a href="../../tags/coffeescript/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">coffeescript</a></div><div class="field-item even"><a href="../../tags/drupal/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">drupal</a></div><div class="field-item odd"><a href="../../tags/drush/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">drush</a></div></div></div></div>
+
+        <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Recently the company I work for shifted the bulk of our instant message communications over to <a href="http://campfirenow.com/">Campfire</a>, and established a series of rooms to discuss our various projects.  This transition seemed to go fairly well, once everyone settled on their preferred client interface.  I was used to using IRC and found a <a href="https://github.com/zerowidth/camper_van">nice little Ruby gem</a> that piped Campfire through my IRC client.  Chatting in this environment quickly had me missing Druplicon, the friendly Drupal fueled chat bot that tirelessly serves the Drupal IRC community.  I decided to look for a replacement, and after some searching I stumbled upon <a href="http://hubot.github.com/">Hubot</a>, a Node.js powered chat bot. It was initially built by the folks at GitHub and includes a long list of <a href="http://hubot-script-catalog.herokuapp.com/">plugin scripts</a> added by community developers.  This was immediately appealing for several reasons:</p>
+
+<ul>
+<li>It is built using Node.js</li>
+<li>It is written in Coffeescript (something I have wanted to try my hand at for a while)</li>
+<li>Additional scripts appeared easy to write, and plugin simply</li>
+<li>It has built in Campfire integration</li>
+</ul>
+
+<p>So I installed Hubot on a small server, with a handful of scripts that I thought would be useful and fun for our team.  Adding the bot to our Campfire rooms was fairly painless, and after writing a small init script we were good to go.  This sparked some discussion among our team about how the bot was deployed, cool ways it could be extended, and methods of use.  A fellow developer, <a href="http://davidfells.net/">David Fells</a>, mentioned that it would be handy if we could tell Hubot to execute <a href="http://drupal.org/project/drush">Drush</a> commands.  This gave me pause, and after a quick:</p>
+
+<p>"That's a great idea! You mind if I implement that?"<br />
+"Sure, go for it."</p>
+
+<p>I found myself firing up my editor, trying a few test methods, and reading up on <a href="http://coffeescript.org/">CoffeeScript</a>. Things moved fairly quickly, once I got going.  I realized <a href="http://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a>was going to be my friend, a core Node method that I had yet to use.  Generally CoffeeScript proved to be the biggest challenge.  While writing the initial prototype I actually used a <a href="http://js2coffee.org/">JavaScript to CoffeScript translator</a> and was cursing the whole time.  However, by the time I was putting the finishing touches on my methods and objects I found myself smiling as I wrote in this almost comical syntax.  Simply put, CoffeeScript is fun! I still find myself favoring the comforting structure of the curly braces and semicolons when working with JavaScript, but now that all seems  somewhat gray and drab, knowing there is something much more playful out there.</p>
+
+<p>As you can imagine there were, and are, several security concerns.  The early prototype actually had user commands pipe right into Drush which is a security nightmare.  Any user with access to the bot could escape or pipe in any old Bash command directly through the bot.  Further, any Drupal installation that Drush is aware of would be at the mercy of users who may or may not have the best intentions at heart. Needless to say this approach was quickly abandoned in favor of a hand picked list of commands made available to the bot.  This caused the code to be a bit more tedious, and likely less elegant, but I needed to insure that Drush would be executing the allowed commands, and nothing more.  After some discussion I also decided to weed the available commands down to a relatively innocuous set (giving information vs. actually changing something).  I attempted to structure the code in a way that it would not be difficult for another developer to add commands. Overall, I'm pretty happy with the <a href="https://github.com/github/hubot-scripts/blob/master/src/scripts/drush.coffee">end result</a>, and the pull request was soon accepted.  You can find this script along with all of the other <a href="http://hubot-script-catalog.herokuapp.com/#drush.coffee">Hubot scripts on GitHub</a>.</p>
+
+<p><em><strong>tl;dr</strong> If you're looking for a fun chatbot for campfire (or otherwise) check out <a href="http://hubot.github.com/">Hubot</a> and enable <a href="http://hubot-script-catalog.herokuapp.com/#drush.coffee">drush.coffee</a> if you'd like that bot to have cool Drush functionality.</em></p>
+</div></div></div>
+    <div class="meta clearfix">
+      </div>
+  <div class="olesain-comments clearfix">
+          </div>
+</div>  </div>
+</div>
+  </div>
+    </div>
+  </div>
+</div>
+<!-- Header -->
+<div id="meta-header" class="clearfix">
+  <div class="header-content">
+    <h1 class="logo"><a href="../../index/index.html">
+      <span class="name">Ryan Oles</span>
+      <span class="name site-name">the<span class="color-orng">oles</span>chool.com</span>
+    </a></h1>
+        <!-- Navigation -->
+          <div id="main-menu" class="top-nav clearfix">
+        <h2 class="element-invisible">Main menu</h2><ul id="main-menu-nav" class="links clearfix"><li class="menu-345 first"><a href="../../about/index.html">About</a></li>
+<li class="menu-275 last"><a href="../../index/index.html" title="go back to front page">Home</a></li>
+</ul>      </div>
+      </div>
+</div>  </body>
+
+<!-- Mirrored from theoleschool.com/blog/hubot-drush-me-drupal by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Sep 2015 17:07:10 GMT -->
+</html>

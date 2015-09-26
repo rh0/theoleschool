@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+  "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+
+
+<!-- Mirrored from theoleschool.com/blog/using-drupal-content-channel-tokens-nodejs by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Sep 2015 17:07:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="You&#039;ve decided to add a bit of Node.js functionality to your Drupal site using the [Drupal Nodejs Module](https://drupal.org/project/nodejs).  After [some reading](http://theoleschool.com/blog/module-development-nodejs-integration) you realize you need to be setting up user message channels using hook_nodejs_user_channels or possibly nodejs_add_user_to_channel. This allows your application to send socket messages to groups of users.  Great!  But you&#039;re writing no simple application. You want to go one step further and manage these channels based not only on some property of the user object, but all users who may be currently viewing a particular Drupal served page.  Suddenly the typical user channels no longer cut it. Try as you might, you&#039;ll find yourself quickly descending into channel management hell. There has got to be a better way. Thankfully content token channels are here to help." />
+<link rel="shortcut icon" href="../../misc/favicon/index.ico" type="image/vnd.microsoft.icon" />
+<meta content="Using Drupal Content Channel Tokens with Nodejs" about="/blog/using-drupal-content-channel-tokens-nodejs" property="dc:title" />
+<meta name="keywords" content="drupal, web development" />
+<link rel="canonical" href="index.html" />
+<link rel="shortlink" href="index.html" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+  <title>Using Drupal Content Channel Tokens with Nodejs | theoleschool</title>
+  <link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_pbm0lsQQJ7A7WCCIMgxLho6mI_kBNgznNUWmTWcnfoE/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_botNHIYRQPys-RH2iA3U4LbV9bPNRS64tLAs8ec1ch8/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_ggwmJjnSHIyQGr6BcS46i7z-SeJR7vFJ2H8b7fsUJ1o/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_wTnXwKLp1ec_eSA6aRSbc1Cr7mXlDTPbLelDm9ZTjQg/index.css" media="screen" />
+  <script type="text/javascript" src="../../sites/default/files/js/js_xAPl0qIk9eowy_iS9tNkCWXLUVoat94SQT48UBCFkyQ/index.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_mEEqrZApHAidJyywsmZR_Ac1d4B-4FLzvR9sbsjVDyg/index.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_IDBX5SzkJ9gGNq7x-qOE_2DZsexqguTJQGMKvi4w-Uw/index.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var _gaq = _gaq || [];_gaq.push(["_setAccount", "UA-25692833-1"]);_gaq.push(["_trackPageview"]);(function() {var ga = document.createElement("script");ga.type = "text/javascript";ga.async = true;ga.src = "../../sites/default/files/googleanalytics/ga/index.js?nvammp";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ga, s);})();
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"olesain","theme_token":"97zyzxPS3qNxe0k6OHpadLXY_mHF2K9usHt0pBfewfQ","js":{"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/admin_menu\/admin_devel\/admin_devel.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/geshifilter\/geshifilter.css":1,"sites\/default\/themes\/olesain\/css\/reset.css":1,"sites\/default\/themes\/olesain\/css\/style.css":1}},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls|xml|z|zip"}});
+//--><!]]>
+</script>
+</head>
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-165 node-type-article" >
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+  </div>
+    <div id="center-col">
+  <!--  Main Content Container -->
+  <div id="main-wrap">
+    <div class="content-wrap">
+              <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+
+    
+  <div class="content">
+    <div id="node-165" class="node node-article node-promoted clearfix">
+      <div class="meta clearfix">
+      <div class="auth">April 28, 2014</div>
+      <div class="created">12:29pm</div>
+    </div>
+  
+    <h2 class="node-title">Using Drupal Content Channel Tokens with Nodejs</h2>    <div class="tags clearfix"><div class="field field-name-field-blog-tags field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="../../tags/nodejs/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">nodejs</a></div><div class="field-item odd"><a href="../../tags/7x/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">7.x</a></div><div class="field-item even"><a href="../../tags/drupal/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">drupal</a></div></div></div></div>
+
+        <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>You've decided to add a bit of Node.js functionality to your Drupal site using the <a href="https://drupal.org/project/nodejs">Drupal Nodejs Module</a>.  After <a href="../module-development-nodejs-integration/index.html">some reading</a> you realize you need to be setting up user message channels using <span class="geshifilter"><code class="php geshifilter-php">hook_nodejs_user_channels</code></span> or possibly <span class="geshifilter"><code class="php geshifilter-php">nodejs_add_user_to_channel</code></span>. This allows your application to send socket messages to groups of users.  Great!  But you're writing no simple application. You want to go one step further and manage these channels based not only on some property of the user object, but all users who may be currently viewing a particular Drupal served page.  Suddenly the typical user channels no longer cut it. Try as you might, you'll find yourself quickly descending into channel management hell. There has got to be a better way. Thankfully content token channels are here to help.</p>
+
+<h3>Send a Message Based on the Content Being Viewed</h3>
+
+<p>You can think of content token channels as a per page (or piece of content) channel subscription.  This differs from the user channels in that it targets users who are currently viewing a specific page rather than users targeted by some property of the user object (regardless of where they are on the site).</p>
+
+<p>There are two main PHP functions to implement a token channel.  <span class="geshifilter"><code class="php geshifilter-php">nodejs_send_content_channel_token</code></span> to generate a token channel for a given piece of content, and <span class="geshifilter"><code class="php geshifilter-php">nodejs_send_content_channel_message</code></span> to send a message to users subscribed to a given content channel.</p>
+
+<p>To illustrate this lets assume we want to create a channel to send user messages when they are viewing a Drupal node of type <em>page</em>.  To begin we will need to setup our content channel for that node type.  A good place to do this would be <span class="geshifilter"><code class="php geshifilter-php">hook_node_view</code></span> which fires when a user views a node.</p>
+
+<div class="geshifilter"><div class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">function</span> example_node_view<span style="color: #009900;">&#40;</span><span style="color: #000088;">$node</span><span style="color: #339933;">,</span> <span style="color: #000088;">$view_mode</span><span style="color: #339933;">,</span> <span style="color: #000088;">$langcode</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$node</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">type</span> <span style="color: #339933;">==</span> <span style="color: #0000ff;">&quot;page&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; nodejs_send_content_channel_token<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'page_node_channel'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; <span style="color: #009900;">&#125;</span><br />
+<span style="color: #009900;">&#125;</span></div></div>
+
+<p>Now every time a node of type <em>page</em> is viewed the Node.js server is notified of the <em>page&#95;node&#95;channel</em> content channel. Node.js then adds the channel to the user for whom the page was rendered.</p>
+
+<p>From here if we wish to send a message to all of the users viewing a node of type <em>page</em> we make a simple call to <span class="geshifilter"><code class="php geshifilter-php">nodejs_send_content_channel_message</code></span>.  When and where you choose to fire this message is up to you.  Possibly you want to notify users if the page they are viewing has been updated (<span class="geshifilter"><code class="php geshifilter-php">hook_node_update</code></span>), a user logs in (<span class="geshifilter"><code class="php geshifilter-php">hook_user_login</code></span>), or some new content was added (<span class="geshifilter"><code class="php geshifilter-php">hook_node_insert</code></span>).</p>
+
+<div class="geshifilter"><div class="php geshifilter-php" style="font-family:monospace;"><span style="color: #666666; font-style: italic;">// Build a message object</span><br />
+<span style="color: #000088;">$message</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> stdClass<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$message</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">channel</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'page_node_channel'</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$message</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">data</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'body'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'Hello World!'</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #666666; font-style: italic;">// Send the message to the channel we created</span><br />
+nodejs_send_content_channel_message<span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></div>
+
+<p>And that's about it!  When <span class="geshifilter"><code class="php geshifilter-php">nodejs_send_content_channel_message</code></span> fires our message will be broadcast to all users subscribed to the page_node_channel.  In this case all users who are currently viewing a node of type <em>page</em>.  This message behaves like any other on the Node.js side, so you could send it to a custom callback handler, as mentioned <a href="../module-development-nodejs-integration/index.html">in an earlier post</a>.</p>
+
+<h3>Token Messages From an Node.js Extension</h3>
+
+<p>If you are writing a Node.js server extension and wish to send a message to a content channel, it is worth noting that there is no immediately exposed functionality to do this.  However, Node.js server extensions are aware of what the content channels are via <span class="geshifilter"><code class="php geshifilter-php">config<span style="color: #339933;">.</span>tokenChannels</code></span>. This allows us to mimic the functionality of the Drupal Node.js server with a helper method in our server extension.</p>
+
+<div class="geshifilter"><div class="jquery geshifilter-jquery" style="font-family:monospace;"><span style="color: #003366; font-weight: bold;">function</span> sendMessageToTokenChannel<span style="color: #009900;">&#40;</span>message<span style="color: #339933;">,</span> config<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>message.<span style="color: #660066;">hasOwnProperty</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'channel'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'publishMessageToContentChannel: An invalid message object was provided.'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">return</span><span style="color: #339933;">;</span><br />
+&nbsp; <span style="color: #009900;">&#125;</span><br />
+&nbsp; <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>config.<span style="color: #660066;">tokenChannels</span>.<span style="color: #660066;">hasOwnProperty</span><span style="color: #009900;">&#40;</span>message.<span style="color: #660066;">channel</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'publishMessageToContentChannel: The channel &quot;'</span> <span style="color: #339933;">+</span> message.<span style="color: #660066;">channel</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">'&quot; doesn<span style="color: #000099; font-weight: bold;">\'</span>t exist.'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">return</span><span style="color: #339933;">;</span><br />
+&nbsp; <span style="color: #009900;">&#125;</span><br />
+<br />
+&nbsp; <span style="color: #000066; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">var</span> socketId <span style="color: #000066; font-weight: bold;">in</span> config.<span style="color: #660066;">tokenChannels</span><span style="color: #009900;">&#91;</span>message.<span style="color: #660066;">channel</span><span style="color: #009900;">&#93;</span>.<span style="color: #660066;">sockets</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; config.<span style="color: #660066;">publishMessageToClient</span><span style="color: #009900;">&#40;</span>socketId<span style="color: #339933;">,</span> message<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; <span style="color: #009900;">&#125;</span><br />
+<span style="color: #009900;">&#125;</span></div></div>
+
+<p>Adding this  method to your server extension, will allow you to send messages to a content channel, by passing the message and config objects from within your <span class="geshifilter"><code class="php geshifilter-php">exports<span style="color: #339933;">.</span>setup</code></span> function.</p>
+
+<p>Using content token channels has greatly simplified several of the Drupal/Node.js projects I have done.  However, it wasn't immediately apparent that this functionality existed.  So I hope this helps to further clarify the capabilities of this module.</p>
+</div></div></div>
+    <div class="meta clearfix">
+      </div>
+  <div class="olesain-comments clearfix">
+          </div>
+</div>  </div>
+</div>
+  </div>
+    </div>
+  </div>
+</div>
+<!-- Header -->
+<div id="meta-header" class="clearfix">
+  <div class="header-content">
+    <h1 class="logo"><a href="../../index/index.html">
+      <span class="name">Ryan Oles</span>
+      <span class="name site-name">the<span class="color-orng">oles</span>chool.com</span>
+    </a></h1>
+        <!-- Navigation -->
+          <div id="main-menu" class="top-nav clearfix">
+        <h2 class="element-invisible">Main menu</h2><ul id="main-menu-nav" class="links clearfix"><li class="menu-345 first"><a href="../../about/index.html">About</a></li>
+<li class="menu-275 last"><a href="../../index/index.html" title="go back to front page">Home</a></li>
+</ul>      </div>
+      </div>
+</div>  </body>
+
+<!-- Mirrored from theoleschool.com/blog/using-drupal-content-channel-tokens-nodejs by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Sep 2015 17:07:06 GMT -->
+</html>

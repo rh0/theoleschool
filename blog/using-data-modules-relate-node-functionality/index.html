@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+  "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+
+
+<!-- Mirrored from theoleschool.com/blog/using-data-modules-relate-node-functionality by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Sep 2015 17:07:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="While I&#039;m on the topic of the Data module, I&#039;d like share my thoughts on some of the confusion surrounding use of the Data Node module included with the package. (see issues 976292 and 898562)
+It&#039;s my opinion that the bulk of the functionality in the Data Node module has been intentionally &quot;left undone.&quot; Instead, the module is giving us the tools to allow us to implement node relationships as needed, ourselves (think API).  My thinking is that this was done to allow the maximum amount of flexibility in relating other data to nodes by minimizing assumptions about what the relationship should be. I have in no way validated this with any of the module maintainers, nor is it denoted in any documentation that I am aware of.  What follows is my &quot;average&quot; use case for this module, and some thoughts on more advanced implementations." />
+<link rel="shortcut icon" href="../../misc/favicon/index.ico" type="image/vnd.microsoft.icon" />
+<meta content="Using the Data Module&amp;#039;s &amp;quot;Relate to Node&amp;quot; Functionality" about="/blog/using-data-modules-relate-node-functionality" property="dc:title" />
+<meta name="keywords" content="drupal, web development" />
+<link rel="canonical" href="index.html" />
+<link rel="shortlink" href="index.html" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+  <title>Using the Data Module&#039;s &quot;Relate to Node&quot; Functionality | theoleschool</title>
+  <link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_pbm0lsQQJ7A7WCCIMgxLho6mI_kBNgznNUWmTWcnfoE/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_botNHIYRQPys-RH2iA3U4LbV9bPNRS64tLAs8ec1ch8/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_ggwmJjnSHIyQGr6BcS46i7z-SeJR7vFJ2H8b7fsUJ1o/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_wTnXwKLp1ec_eSA6aRSbc1Cr7mXlDTPbLelDm9ZTjQg/index.css" media="screen" />
+  <script type="text/javascript" src="../../sites/default/files/js/js_xAPl0qIk9eowy_iS9tNkCWXLUVoat94SQT48UBCFkyQ/index.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_mEEqrZApHAidJyywsmZR_Ac1d4B-4FLzvR9sbsjVDyg/index.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_IDBX5SzkJ9gGNq7x-qOE_2DZsexqguTJQGMKvi4w-Uw/index.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var _gaq = _gaq || [];_gaq.push(["_setAccount", "UA-25692833-1"]);_gaq.push(["_trackPageview"]);(function() {var ga = document.createElement("script");ga.type = "text/javascript";ga.async = true;ga.src = "../../sites/default/files/googleanalytics/ga/index.js?nvammp";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ga, s);})();
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../sites/default/files/js/js_ix99IaKNwg4XQrjVLFsrlxH0Czfb_Wvr8_P-vBK2zQU/index.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"olesain","theme_token":"W1cDQYvvRVbQKRChKTBTYKuIzZkMWnKxJd1LbOtXfhw","js":{"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/admin_menu\/admin_devel\/admin_devel.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/modules\/disqus\/disqus.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/geshifilter\/geshifilter.css":1,"sites\/default\/themes\/olesain\/css\/reset.css":1,"sites\/default\/themes\/olesain\/css\/style.css":1}},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls|xml|z|zip"},"disqus":{"domain":"Theoleschool","url":"http:\/\/theoleschool.com\/blog\/using-data-modules-relate-node-functionality","title":"Using the Data Module\u0026#039;s \u0026quot;Relate to Node\u0026quot; Functionality","identifier":"node\/157"}});
+//--><!]]>
+</script>
+</head>
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-157 node-type-article" >
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+  </div>
+    <div id="center-col">
+  <!--  Main Content Container -->
+  <div id="main-wrap">
+    <div class="content-wrap">
+              <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+
+    
+  <div class="content">
+    <div id="node-157" class="node node-article node-promoted clearfix">
+      <div class="meta clearfix">
+      <div class="auth">March 3, 2012</div>
+      <div class="created">9:44pm</div>
+    </div>
+  
+    <h2 class="node-title">Using the Data Module&#039;s &quot;Relate to Node&quot; Functionality</h2>    <div class="tags clearfix"><div class="field field-name-field-blog-tags field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="../../tags/data-module/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">data module</a></div><div class="field-item odd"><a href="../../tags/6x/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">6.x</a></div><div class="field-item even"><a href="../../tags/drupal/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">drupal</a></div></div></div></div>
+
+        <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>While I'm <a href="../adopting-table-schema-using-data-module/index.html">on the topic</a> of the <a href="http://drupal.org/project/data">Data module</a>, I'd like to share my thoughts on some of the confusion surrounding use of the Data Node module included with the package. (see issues <a href="http://drupal.org/node/976292">976292</a> and <a href="http://drupal.org/node/898562">898562</a>)</p>
+<p>It's my opinion that the bulk of the functionality in the Data Node module has been intentionally "left undone." Instead, the module is giving us the tools to allow us to implement node relationships as needed, ourselves (think API).  My thinking is that this was done to allow the maximum amount of flexibility in relating other data to nodes by minimizing assumptions about what the relationship should be. <em>I have in no way validated this with any of the module maintainers, nor is it denoted in any documentation that I am aware of.</em>  What follows is my "average" use case for this module, and some thoughts on more advanced implementations.</p>
+<img src="../../sites/default/files/u3/relate-to-node-form/index.png" style="float:right; margin: 0 0 0 10px; width:250px;" /><p>When enabled, this functionality is apparent in Drupal's admin UI at <span class="geshifilter"><code class="php geshifilter-php">admin<span style="color: #339933;">/</span>build<span style="color: #339933;">/</span>data<span style="color: #339933;">/</span>edit<span style="color: #339933;">/%</span>table_name<span style="color: #339933;">/</span>node</code></span> by clicking on the edit link next to a table at <span class="geshifilter"><code class="php geshifilter-php">admin<span style="color: #339933;">/</span>build<span style="color: #339933;">/</span>data<span style="color: #339933;">/</span>overview</code></span> then clicking the "Relate to Nodes" tab.  This page presents a form asking you which content type you would like the table related to, and the column name of the id key in the table you are referencing.  Simple right?  Well sorta...  When you submit this form and happily skip over to views to reference the node table, it quickly becomes apparent that nothing has happened.  Checking the <span class="geshifilter"><code class="php geshifilter-php">data_table_node</code></span> table in the database will reveal it to be empty.  So what's up here?  Is this just an unfinished piece?</p>
+<p>After taking a look in the data_node.module things start to make a bit more sense.  At first glance we see some tantalizing functions, especially:</p>
+<div class="geshifilter"><div class="drupal6 geshifilter-drupal6" style="font-family:monospace;"><span style="color: #808080; font-style: italic;">/**<br />
+ * Add a relationship between a data table and a node.<br />
+ */</span><br /><span style="color: #000000; font-weight: bold;">function</span> data_node_add<span style="color: #66cc66;">(</span><span style="color: #0000ff;">$table</span>, <span style="color: #0000ff;">$id</span>, <span style="color: #0000ff;">$nid</span><span style="color: #66cc66;">)</span> <span style="color: #66cc66;">{</span><br />
+  <span style="color: #0000ff;">$save</span> = <a href="http://www.php.net/array"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">(</span><br />
+    <span style="color: #ff0000;">'data_table_name'</span> =<span style="color: #66cc66;">&gt;</span> <span style="color: #0000ff;">$table</span>-<span style="color: #66cc66;">&gt;</span><span style="color: #006600;">get</span><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'name'</span><span style="color: #66cc66;">)</span>,<br />
+    <span style="color: #ff0000;">'id'</span> =<span style="color: #66cc66;">&gt;</span> <span style="color: #0000ff;">$id</span>,<br />
+    <span style="color: #ff0000;">'nid'</span> =<span style="color: #66cc66;">&gt;</span> <span style="color: #0000ff;">$nid</span>,<br />
+  <span style="color: #66cc66;">)</span>;<br />
+  <span style="color: #b1b100;">return</span> <a href="http://api.drupal.org/api/function/drupal_write_record/6"><span style="color: #000066;">drupal_write_record</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'data_table_node'</span>, <span style="color: #0000ff;">$save</span><span style="color: #66cc66;">)</span>;<br /><span style="color: #66cc66;">}</span><br /><span style="color: #808080; font-style: italic;">/**<br />
+ * Remove a relationship between a data table and a node.<br />
+ */</span><br /><span style="color: #000000; font-weight: bold;">function</span> data_node_remove<span style="color: #66cc66;">(</span><span style="color: #0000ff;">$table</span>, <span style="color: #0000ff;">$id</span>, <span style="color: #0000ff;">$nid</span><span style="color: #66cc66;">)</span> <span style="color: #66cc66;">{</span><br />
+  <a href="http://api.drupal.org/api/function/db_query/6"><span style="color: #000066;">db_query</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">"DELETE FROM {data_table_node} WHERE data_table_name = '%s' AND id = %d AND nid = %d"</span>, <span style="color: #0000ff;">$table</span>-<span style="color: #66cc66;">&gt;</span><span style="color: #006600;">get</span><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'name'</span><span style="color: #66cc66;">)</span>, <span style="color: #0000ff;">$id</span>, <span style="color: #0000ff;">$nid</span><span style="color: #66cc66;">)</span>;<br /><span style="color: #66cc66;">}</span></div></div>
+<p>Typically I'll stop right here.  I really only use the Data module for custom reporting, and when doing so I handle the CRUD functions for the new data type myself.  My data type's row reference to nodes are nearly always a 1 to 1 mapping.  To further simplify things for myself, the <span class="geshifilter"><code class="php geshifilter-php"><span style="color: #000088;">$id</span></code></span> I use in my custom data type is often the node id of it's intended reference.  This makes my calls to these functions look something like:</p>
+<div class="geshifilter"><div class="drupal6 geshifilter-drupal6" style="font-family:monospace;">  <span style="color: #808080; font-style: italic;">//insert my_table with a nid key</span><br />
+  ...<br />
+  <span style="color: #808080; font-style: italic;">//inform Data Node of the reference</span><br />
+  <span style="color: #0000ff;">$my_table_object</span> = data_get_table<span style="color: #66cc66;">(</span><span style="color: #ff0000;">'my_table'</span><span style="color: #66cc66;">)</span>;<br />
+  data_node_add<span style="color: #66cc66;">(</span><span style="color: #0000ff;">$my_table_object</span>, <span style="color: #0000ff;">$nid</span>, <span style="color: #0000ff;">$nid</span><span style="color: #66cc66;">)</span>;</div></div>
+<p>This will populate the <span class="geshifilter"><code class="php geshifilter-php">data_table_node</code></span> table so that when we use the relationship in out data type view it will return results.  Of course deletion will be handled similarly.</p>
+<p>This is admittedly a somewhat basal interaction with this module, though it is often enough to satisfy my needs.  However Data Node allows for much more complexity and has a certain level of user interaction built in just below the surface.</p>
+<p>It's not until we start thinking about the data structures involved that the scope of the allowed complexity becomes apparent. It is easy to assume that referencing a data type to a node is always going to be 1 to 1 (much like the typical use of CCK's Node Reference.)  However, this may not always be the case.  It is not required that the data table's id be the nid of the node it is referencing.  It only has to be unique within the table. Because of this, a large field of possibilities emerge. You may have data type rows referencing many nodes each (1 to many), many data type rows referencing a single node (many to 1), or, of course, any number of data type rows referencing any number of nodes (many to many).  The <span class="geshifilter"><code class="php geshifilter-php">data_table_node</code></span> table along with the provided CRUD functions, like the ones mentioned above, will allow for this. I think that this flexibility is a big reason that the module has been left so open.</p>
+<p>Lastly, a closer look at the Data Node module will reveal some rather fancy display functions for the underlying relationship CRUD.</p>
+<div class="geshifilter"><div class="drupal6 geshifilter-drupal6" style="font-family:monospace;"><span style="color: #808080; font-style: italic;">/**<br />
+ * Render an add link for a given item..<br />
+ */</span><br /><span style="color: #000000; font-weight: bold;">function</span> data_node_render_add_link<span style="color: #66cc66;">(</span><span style="color: #0000ff;">$table</span>, <span style="color: #0000ff;">$id</span>, <span style="color: #0000ff;">$nid</span><span style="color: #66cc66;">)</span> <span style="color: #66cc66;">{</span><br />
+  <a href="http://api.drupal.org/api/function/drupal_add_css/6"><span style="color: #000066;">drupal_add_css</span></a><span style="color: #66cc66;">(</span><a href="http://api.drupal.org/api/function/drupal_get_path/6"><span style="color: #000066;">drupal_get_path</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'module'</span>, <span style="color: #ff0000;">'data_node'</span><span style="color: #66cc66;">)</span> . <span style="color: #ff0000;">'/data_node.css'</span><span style="color: #66cc66;">)</span>;<br />
+  <a href="http://api.drupal.org/api/function/drupal_add_js/6"><span style="color: #000066;">drupal_add_js</span></a><span style="color: #66cc66;">(</span><a href="http://api.drupal.org/api/function/drupal_get_path/6"><span style="color: #000066;">drupal_get_path</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'module'</span>, <span style="color: #ff0000;">'data_node'</span><span style="color: #66cc66;">)</span> . <span style="color: #ff0000;">'/data_node.js'</span><span style="color: #66cc66;">)</span>;<br /><br />
+  <span style="color: #0000ff;">$title</span> = _data_node_get_title<span style="color: #66cc66;">(</span><span style="color: #0000ff;">$nid</span><span style="color: #66cc66;">)</span>;<br />
+  <span style="color: #0000ff;">$table_name</span> = <span style="color: #0000ff;">$table</span>-<span style="color: #66cc66;">&gt;</span><span style="color: #006600;">get</span><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'name'</span><span style="color: #66cc66;">)</span>;<br />
+  <span style="color: #0000ff;">$class</span> = <span style="color: #ff0000;">"data_node_link-{$table_name}-{$id}-{$nid}"</span>;<br />
+  <span style="color: #b1b100;">return</span> <a href="http://api.drupal.org/api/function/l/6"><span style="color: #000066;">l</span></a><span style="color: #66cc66;">(</span><a href="http://api.drupal.org/api/function/t/6"><span style="color: #000066;">t</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'Add to !title'</span>, <a href="http://www.php.net/array"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'!title'</span> =<span style="color: #66cc66;">&gt;</span> <span style="color: #0000ff;">$title</span><span style="color: #66cc66;">)</span><span style="color: #66cc66;">)</span>, data_node_add_path<span style="color: #66cc66;">(</span><span style="color: #0000ff;">$table</span>, <span style="color: #0000ff;">$id</span>, <span style="color: #0000ff;">$nid</span><span style="color: #66cc66;">)</span>, <a href="http://www.php.net/array"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'attributes'</span> =<span style="color: #66cc66;">&gt;</span> <a href="http://www.php.net/array"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'class'</span> =<span style="color: #66cc66;">&gt;</span> <span style="color: #ff0000;">"data-node-add $class"</span><span style="color: #66cc66;">)</span>, <span style="color: #ff0000;">'query'</span> =<span style="color: #66cc66;">&gt;</span> <a href="http://api.drupal.org/api/function/drupal_get_destination/6"><span style="color: #000066;">drupal_get_destination</span></a><span style="color: #66cc66;">(</span><span style="color: #66cc66;">)</span><span style="color: #66cc66;">)</span><span style="color: #66cc66;">)</span>;<br /><span style="color: #66cc66;">}</span><br /><br /><span style="color: #808080; font-style: italic;">/**<br />
+ * Render a remove link for a given item.<br />
+ */</span><br /><span style="color: #000000; font-weight: bold;">function</span> data_node_render_remove_link<span style="color: #66cc66;">(</span><span style="color: #0000ff;">$table</span>, <span style="color: #0000ff;">$id</span>, <span style="color: #0000ff;">$nid</span><span style="color: #66cc66;">)</span> <span style="color: #66cc66;">{</span><br />
+  <a href="http://api.drupal.org/api/function/drupal_add_css/6"><span style="color: #000066;">drupal_add_css</span></a><span style="color: #66cc66;">(</span><a href="http://api.drupal.org/api/function/drupal_get_path/6"><span style="color: #000066;">drupal_get_path</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'module'</span>, <span style="color: #ff0000;">'data_node'</span><span style="color: #66cc66;">)</span> . <span style="color: #ff0000;">'/data_node.css'</span><span style="color: #66cc66;">)</span>;<br />
+  <a href="http://api.drupal.org/api/function/drupal_add_js/6"><span style="color: #000066;">drupal_add_js</span></a><span style="color: #66cc66;">(</span><a href="http://api.drupal.org/api/function/drupal_get_path/6"><span style="color: #000066;">drupal_get_path</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'module'</span>, <span style="color: #ff0000;">'data_node'</span><span style="color: #66cc66;">)</span> . <span style="color: #ff0000;">'/data_node.js'</span><span style="color: #66cc66;">)</span>;<br /><br />
+  <span style="color: #0000ff;">$title</span> = _data_node_get_title<span style="color: #66cc66;">(</span><span style="color: #0000ff;">$nid</span><span style="color: #66cc66;">)</span>;<br />
+  <span style="color: #0000ff;">$table_name</span> = <span style="color: #0000ff;">$table</span>-<span style="color: #66cc66;">&gt;</span><span style="color: #006600;">get</span><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'name'</span><span style="color: #66cc66;">)</span>;<br />
+  <span style="color: #0000ff;">$class</span> = <span style="color: #ff0000;">"data_node_link-{$table_name}-{$id}-{$nid}"</span>;<br />
+  <span style="color: #b1b100;">return</span> <a href="http://api.drupal.org/api/function/l/6"><span style="color: #000066;">l</span></a><span style="color: #66cc66;">(</span><a href="http://api.drupal.org/api/function/t/6"><span style="color: #000066;">t</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'Remove from !title'</span>, <a href="http://www.php.net/array"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'!title'</span> =<span style="color: #66cc66;">&gt;</span> <span style="color: #0000ff;">$title</span><span style="color: #66cc66;">)</span><span style="color: #66cc66;">)</span>, data_node_remove_path<span style="color: #66cc66;">(</span><span style="color: #0000ff;">$table</span>, <span style="color: #0000ff;">$id</span>, <span style="color: #0000ff;">$nid</span><span style="color: #66cc66;">)</span>, <a href="http://www.php.net/array"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'attributes'</span> =<span style="color: #66cc66;">&gt;</span> <a href="http://www.php.net/array"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'class'</span> =<span style="color: #66cc66;">&gt;</span> <span style="color: #ff0000;">"data-node-remove $class"</span><span style="color: #66cc66;">)</span>, <span style="color: #ff0000;">'query'</span> =<span style="color: #66cc66;">&gt;</span> <a href="http://api.drupal.org/api/function/drupal_get_destination/6"><span style="color: #000066;">drupal_get_destination</span></a><span style="color: #66cc66;">(</span><span style="color: #66cc66;">)</span><span style="color: #66cc66;">)</span><span style="color: #66cc66;">)</span>;<br /><span style="color: #66cc66;">}</span></div></div>
+<p>These are the two pertinent functions. They both return a link that will hit a page callback to do just what you would expect. Add or remove a node relationship.  This allows you "expose" the functionality to the user.  The link could be placed on a view or node page to allow users to add or remove the relation to a specific data type themselves, "on the fly".  This, in combination with the flexibility of the relationship itself, lends to a huge variety of possible use cases with relatively few function calls.</p>
+<p>So wrapping this up.  Data Node module is best thought of as an API.  It doesn't do so much right out of the box, but with minimal implementation it becomes a fairly powerful tool.</p></div></div></div><div id="disqus_thread"><noscript><p><a href="http://theoleschool.disqus.com/?url=http%3A%2F%2Ftheoleschool.com%2Fblog%2Fusing-data-modules-relate-node-functionality">View the discussion thread.</a></p></noscript></div>
+    <div class="meta clearfix">
+      </div>
+  <div class="olesain-comments clearfix">
+          </div>
+</div>  </div>
+</div>
+  </div>
+    </div>
+  </div>
+</div>
+<!-- Header -->
+<div id="meta-header" class="clearfix">
+  <div class="header-content">
+    <h1 class="logo"><a href="../../index/index.html">
+      <span class="name">Ryan Oles</span>
+      <span class="name site-name">the<span class="color-orng">oles</span>chool.com</span>
+    </a></h1>
+        <!-- Navigation -->
+          <div id="main-menu" class="top-nav clearfix">
+        <h2 class="element-invisible">Main menu</h2><ul id="main-menu-nav" class="links clearfix"><li class="menu-345 first"><a href="../../about/index.html">About</a></li>
+<li class="menu-275 last"><a href="../../index/index.html" title="go back to front page">Home</a></li>
+</ul>      </div>
+      </div>
+</div>  </body>
+
+<!-- Mirrored from theoleschool.com/blog/using-data-modules-relate-node-functionality by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Sep 2015 17:07:18 GMT -->
+</html>

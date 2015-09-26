@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+  "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+
+
+<!-- Mirrored from theoleschool.com/blog/using-hookviewsalter-add-group-statement by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Sep 2015 17:07:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="I should note this post deals with Views 2.x on Drupal 6.x
+When Views doesn&#039;t quite spit out the query we are looking for we can turn to hook_views_query_alter(&amp;$view, &amp;$query) to nudge it in the right direction.  This is by no means news, and there are many a blog post detailing various ways to alter the query using this function.  However, recently, I ran into an odd issue when attempting to add a GROUP BY statement." />
+<link rel="shortcut icon" href="../../misc/favicon/index.ico" type="image/vnd.microsoft.icon" />
+<meta content="Using hook_views_alter to Add a GROUP BY Statement" about="/blog/using-hookviewsalter-add-group-statement" property="dc:title" />
+<meta name="keywords" content="drupal, web development" />
+<link rel="canonical" href="index.html" />
+<link rel="shortlink" href="index.html" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+  <title>Using hook_views_alter to Add a GROUP BY Statement | theoleschool</title>
+  <link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_pbm0lsQQJ7A7WCCIMgxLho6mI_kBNgznNUWmTWcnfoE/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_botNHIYRQPys-RH2iA3U4LbV9bPNRS64tLAs8ec1ch8/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_ggwmJjnSHIyQGr6BcS46i7z-SeJR7vFJ2H8b7fsUJ1o/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_wTnXwKLp1ec_eSA6aRSbc1Cr7mXlDTPbLelDm9ZTjQg/index.css" media="screen" />
+  <script type="text/javascript" src="../../sites/default/files/js/js_xAPl0qIk9eowy_iS9tNkCWXLUVoat94SQT48UBCFkyQ/index.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_mEEqrZApHAidJyywsmZR_Ac1d4B-4FLzvR9sbsjVDyg/index.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_IDBX5SzkJ9gGNq7x-qOE_2DZsexqguTJQGMKvi4w-Uw/index.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var _gaq = _gaq || [];_gaq.push(["_setAccount", "UA-25692833-1"]);_gaq.push(["_trackPageview"]);(function() {var ga = document.createElement("script");ga.type = "text/javascript";ga.async = true;ga.src = "../../sites/default/files/googleanalytics/ga/index.js?nvammp";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ga, s);})();
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../sites/default/files/js/js_ix99IaKNwg4XQrjVLFsrlxH0Czfb_Wvr8_P-vBK2zQU/index.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"olesain","theme_token":"mn4RdYdfxTdLKl_eoh4c6Sg6qd1de92JEXYkk3M8rlc","js":{"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/admin_menu\/admin_devel\/admin_devel.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/modules\/disqus\/disqus.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/geshifilter\/geshifilter.css":1,"sites\/default\/themes\/olesain\/css\/reset.css":1,"sites\/default\/themes\/olesain\/css\/style.css":1}},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls|xml|z|zip"},"disqus":{"domain":"Theoleschool","url":"http:\/\/theoleschool.com\/blog\/using-hookviewsalter-add-group-statement","title":"Using hook_views_alter to Add a GROUP BY Statement","identifier":"node\/159"}});
+//--><!]]>
+</script>
+</head>
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-159 node-type-article" >
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+  </div>
+    <div id="center-col">
+  <!--  Main Content Container -->
+  <div id="main-wrap">
+    <div class="content-wrap">
+              <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+
+    
+  <div class="content">
+    <div id="node-159" class="node node-article node-promoted clearfix">
+      <div class="meta clearfix">
+      <div class="auth">March 12, 2012</div>
+      <div class="created">10:09am</div>
+    </div>
+  
+    <h2 class="node-title">Using hook_views_alter to Add a GROUP BY Statement</h2>    <div class="tags clearfix"><div class="field field-name-field-blog-tags field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="../../tags/views/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">views</a></div><div class="field-item odd"><a href="../../tags/6x/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">6.x</a></div><div class="field-item even"><a href="../../tags/drupal/index.html" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">drupal</a></div></div></div></div>
+
+        <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p><em>I should note this post deals with Views 2.x on Drupal 6.x</em></p>
+<p>When Views doesn't quite spit out the query we are looking for we can turn to <span class="geshifilter"><code class="php geshifilter-php">hook_views_query_alter<span style="color: #009900;">(</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$view</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$query</span><span style="color: #009900;">)</span></code></span> to nudge it in the right direction.  This is by no means news, and there are many a blog post detailing various ways to alter the query using this function.  However, recently, I ran into an odd issue when attempting to add a <span class="geshifilter"><code class="sql geshifilter-sql"><span style="color: #993333; font-weight: bold;">GROUP</span> <span style="color: #993333; font-weight: bold;">BY</span></code></span> statement.</p>
+<p>The <a href="http://drupal.org/node/385158">issue</a> can be observed when attempting to use the <a href="http://views.doc.logrus.com/classviews__query.html#089b7eab81ec9cb4b24aa489ff4ac448"><span class="geshifilter"><code class="php geshifilter-php">add_groupby</code></span>  function</a> to a field in the query.  As an example, say we have a node view with a few fields (node id, node title, and user id).  This will give a simple query:</p>
+<div class="geshifilter"><div class="sql geshifilter-sql" style="font-family:monospace;"><span style="color: #993333; font-weight: bold;">SELECT</span> node<span style="color: #66cc66;">.</span>nid <span style="color: #993333; font-weight: bold;">AS</span> nid<span style="color: #66cc66;">,</span> <br />
+       node<span style="color: #66cc66;">.</span>title <span style="color: #993333; font-weight: bold;">AS</span> node_title<span style="color: #66cc66;">,</span> <br />
+       users<span style="color: #66cc66;">.</span>uid <span style="color: #993333; font-weight: bold;">AS</span> users_uid <br /><span style="color: #993333; font-weight: bold;">FROM</span> node node  <br /><span style="color: #993333; font-weight: bold;">INNER</span> <span style="color: #993333; font-weight: bold;">JOIN</span> users users <span style="color: #993333; font-weight: bold;">ON</span> node<span style="color: #66cc66;">.</span>uid <span style="color: #66cc66;">=</span> users<span style="color: #66cc66;">.</span>uid</div></div>
+<p>Now, say we want to do something silly and get this query to group by user id.  A node view does not allow for this, so we turn to <span class="geshifilter"><code class="php geshifilter-php">hook_views_query_alter</code></span>.</p>
+<div class="geshifilter"><div class="drupal6 geshifilter-drupal6" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">function</span> my_module_views_query_alter<span style="color: #66cc66;">(</span><span style="color: #66cc66;">&amp;</span><span style="color: #0000ff;">$view</span>, <span style="color: #66cc66;">&amp;</span><span style="color: #0000ff;">$query</span><span style="color: #66cc66;">)</span> <span style="color: #66cc66;">{</span><br />
+  <span style="color: #b1b100;">switch</span><span style="color: #66cc66;">(</span><span style="color: #0000ff;">$view</span>-<span style="color: #66cc66;">&gt;</span><span style="color: #006600;">name</span><span style="color: #66cc66;">)</span> <span style="color: #66cc66;">{</span><br />
+    <span style="color: #b1b100;">case</span> <span style="color: #ff0000;">'my_view_name'</span>:<br />
+      <span style="color: #808080; font-style: italic;">//add the group by  on the user id field </span><br />
+      <span style="color: #0000ff;">$query</span>-<span style="color: #66cc66;">&gt;</span><span style="color: #006600;">add_groupby</span><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'users_uid'</span><span style="color: #66cc66;">)</span>;<br />
+      <span style="color: #b1b100;">break</span>;<br />
+  <span style="color: #66cc66;">}</span><br /><span style="color: #66cc66;">}</span></div></div>
+<p>We expect to see a nice <span class="geshifilter"><code class="sql geshifilter-sql"><span style="color: #993333; font-weight: bold;">GROUP</span> <span style="color: #993333; font-weight: bold;">BY</span> users_uid</code></span> tacked on to the end of our query, but instead there is a disturbing  <span class="geshifilter"><code class="sql geshifilter-sql"><span style="color: #993333; font-weight: bold;">GROUP</span> <span style="color: #993333; font-weight: bold;">BY</span> nid<span style="color: #66cc66;">,</span> node_title<span style="color: #66cc66;">,</span> users_uid</code></span>.  What gives?  Merlinofchaos <a href="http://drupal.org/node/385158#comment-1296924">clarifies</a> for us:</p>
+<p><em>"When using GROUP BY items that appear in the SELECT must either use aggregate functions OR appear in the GROUP BY. This is enforced by postgres, therefore Views must enforce this."</em></p>
+<p>It is good that Views is looking out for the rules of postgres; it's what helps make it the powerful and flexible tool it is.  In this application though, I am not worried about postgres and simply want to alter a single Views query on an sql database.  I know that I can pass an 'aggregate' flag to the fields in the query object to denote that they use an aggregate function, even if they do not.  Worth a try...</p>
+<div class="geshifilter"><div class="drupal6 geshifilter-drupal6" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">function</span> dsic_judging_views_query_alter<span style="color: #66cc66;">(</span><span style="color: #66cc66;">&amp;</span><span style="color: #0000ff;">$view</span>, <span style="color: #66cc66;">&amp;</span><span style="color: #0000ff;">$query</span><span style="color: #66cc66;">)</span> <span style="color: #66cc66;">{</span><br />
+  <span style="color: #b1b100;">switch</span><span style="color: #66cc66;">(</span><span style="color: #0000ff;">$view</span>-<span style="color: #66cc66;">&gt;</span><span style="color: #006600;">name</span><span style="color: #66cc66;">)</span> <span style="color: #66cc66;">{</span><br />
+    <span style="color: #b1b100;">case</span> <span style="color: #ff0000;">'dsic_judge_incomplete'</span>:<br />
+      <span style="color: #808080; font-style: italic;">//loop through the fields and add the aggregate indicator</span><br />
+      <span style="color: #b1b100;">foreach</span><span style="color: #66cc66;">(</span><span style="color: #0000ff;">$query</span>-<span style="color: #66cc66;">&gt;</span><span style="color: #006600;">fields</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$key</span> =<span style="color: #66cc66;">&gt;</span> <span style="color: #0000ff;">$field</span><span style="color: #66cc66;">)</span> <span style="color: #66cc66;">{</span><br />
+        <span style="color: #0000ff;">$query</span>-<span style="color: #66cc66;">&gt;</span><span style="color: #006600;">fields</span><span style="color: #66cc66;">[</span><span style="color: #0000ff;">$key</span><span style="color: #66cc66;">]</span><span style="color: #66cc66;">[</span><span style="color: #ff0000;">'aggregate'</span><span style="color: #66cc66;">]</span> = <span style="color: #000000; font-weight: bold;">TRUE</span>;<br />
+      <span style="color: #66cc66;">}</span><br />
+      <span style="color: #0000ff;">$query</span>-<span style="color: #66cc66;">&gt;</span><span style="color: #006600;">add_groupby</span><span style="color: #66cc66;">(</span><span style="color: #ff0000;">'users_uid'</span><span style="color: #66cc66;">)</span>;<br />
+      <span style="color: #b1b100;">break</span>;<br />
+  <span style="color: #66cc66;">}</span><br /><span style="color: #66cc66;">}</span></div></div>
+<p>Turns out this works!  Jumping back to our view we see the query we are after:</p>
+<div class="geshifilter"><div class="sql geshifilter-sql" style="font-family:monospace;"><span style="color: #993333; font-weight: bold;">SELECT</span> node<span style="color: #66cc66;">.</span>nid <span style="color: #993333; font-weight: bold;">AS</span> nid<span style="color: #66cc66;">,</span> <br />
+       node<span style="color: #66cc66;">.</span>title <span style="color: #993333; font-weight: bold;">AS</span> node_title<span style="color: #66cc66;">,</span> <br />
+       users<span style="color: #66cc66;">.</span>uid <span style="color: #993333; font-weight: bold;">AS</span> users_uid <br /><span style="color: #993333; font-weight: bold;">FROM</span> node node  <br /><span style="color: #993333; font-weight: bold;">INNER</span> <span style="color: #993333; font-weight: bold;">JOIN</span> users users <span style="color: #993333; font-weight: bold;">ON</span> node<span style="color: #66cc66;">.</span>uid <span style="color: #66cc66;">=</span> users<span style="color: #66cc66;">.</span>uid<br /><span style="color: #993333; font-weight: bold;">GROUP</span> <span style="color: #993333; font-weight: bold;">BY</span> users_uid</div></div>
+<p>If it looks like a hack, and quacks like a hack, then it's probably a... well ya know.  However, I don't have big qualms with implementing this.  Views behavior is in place to accommodate a database that, in this instance, is not being used.  Further, I am already using a hook function to modify a view beyond what that view is capable of spitting out on its own.  Lastly, I am able to accomplish this without modifying Views core.  All of that adds up to a valid use case and helps me to sleep at night.</p></div></div></div><div id="disqus_thread"><noscript><p><a href="http://theoleschool.disqus.com/?url=http%3A%2F%2Ftheoleschool.com%2Fblog%2Fusing-hookviewsalter-add-group-statement">View the discussion thread.</a></p></noscript></div>
+    <div class="meta clearfix">
+      </div>
+  <div class="olesain-comments clearfix">
+          </div>
+</div>  </div>
+</div>
+  </div>
+    </div>
+  </div>
+</div>
+<!-- Header -->
+<div id="meta-header" class="clearfix">
+  <div class="header-content">
+    <h1 class="logo"><a href="../../index/index.html">
+      <span class="name">Ryan Oles</span>
+      <span class="name site-name">the<span class="color-orng">oles</span>chool.com</span>
+    </a></h1>
+        <!-- Navigation -->
+          <div id="main-menu" class="top-nav clearfix">
+        <h2 class="element-invisible">Main menu</h2><ul id="main-menu-nav" class="links clearfix"><li class="menu-345 first"><a href="../../about/index.html">About</a></li>
+<li class="menu-275 last"><a href="../../index/index.html" title="go back to front page">Home</a></li>
+</ul>      </div>
+      </div>
+</div>  </body>
+
+<!-- Mirrored from theoleschool.com/blog/using-hookviewsalter-add-group-statement by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Sep 2015 17:07:13 GMT -->
+</html>
